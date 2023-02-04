@@ -1,5 +1,5 @@
-#include<iostream>
-#include<stdlib.h>
+#include <iostream>
+#include <stdlib.h>
 #include <time.h>
 #include <sys/stat.h>
 
@@ -19,8 +19,7 @@ class Bug{
 			fseek(fpS, 0L, SEEK_END);
 			int Ans = ftell(fpS);
 			fclose(fpS);
-			int i = 0;
-			int o ;
+			int i = 0;int o ;
 			for(i = 0,o = Ans; o > 0; o / 10, i++);
 			char str[i];
 			for(int o = 0;Ans > 0;Ans / 10,o++){
@@ -28,7 +27,7 @@ class Bug{
 			}
 			return str;
 		}
-		void Debug(int argc, char** argv){
+		void Debug(){
 			string base_filename = Path.substr(Path.find_last_of("/\\") + 1);
 			string path_filename = Path.substr(0, Path.find_last_of("/\\"));
 			srand( time(NULL) );
@@ -49,17 +48,19 @@ class Bug{
 			fclose(fp);
 		}
 		void Compiler(int argc, char** argv){
-			if(argc > 2){
-				cout << "Error!!!";
+			if(argc < 2){
+				cout << "南無觀世input薩\n您沒給屍體我無法燒\n"; 
 				system("pause");
 				return;
 			}
-			FileName = *(argv+1);
-			pos = FileName.find(".");
-			Path = FileName.substr(0, pos) + ".rip";
-			Type = FileName.substr(pos);
-			Debug(argc, argv);
-			remove(*(argv+1));
+			else{
+				FileName = *(argv+1);
+				pos = FileName.find(".");
+				Path = FileName.substr(0, pos) + ".rip";
+				Type = FileName.substr(pos);
+			}
+			Debug();
+			if(argc > 2) remove(*(argv+1));
 			cout << "Fired file...\n" <<
 					"--------\n" <<
 					"- Filename: " << Path << endl <<
